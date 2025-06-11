@@ -75,7 +75,7 @@ public class MenuAdministrador {
         String alergiasm = "";
         List<String> alergias = new ArrayList<>();
         String cursom = "";
-        String curso = null;
+        String curso = "";
         String num_expediente = "";
 
         System.out.println("==== Registro de Usuario ====");
@@ -126,26 +126,6 @@ public class MenuAdministrador {
 
             rolm = sc.nextLine();
 
-            /*switch (rolm){
-                case "1":
-                    System.out.println("Rol seleccionado: ALUMNO");
-                    //Seleccionar alergias
-                    seleccionarAlergias(alergias, alergiasm);
-                    // Seleccionar curso
-                    seleccionarCurso(cursom, curso);
-                    // Número de expediente
-                    do {
-                        System.out.println("Introduce el número de expediente del alumno:");
-                        num_expediente = sc.nextLine();
-                    } while (!Validaciones.esNum(num_expediente));
-                    nuevo = new Alumno(usuario, nombre, apellidos, email, password, fecha_nacimiento, alergias, curso, num_expediente);
-                    break;
-                case "2"
-
-
-            }*/
-
-
             // Validar que se haya seleccionado una opción válida
             if (rolm.equals("1") || rolm.equals("2") || rolm.equals("3")) {
                 opcionValidaSeleccionada = true;
@@ -156,7 +136,7 @@ public class MenuAdministrador {
                         //Seleccionar alergias
                         seleccionarAlergias(alergias, alergiasm);
                         // Seleccionar curso
-                        seleccionarCurso(cursom, curso);
+                        curso = seleccionarCurso();
                         // Número de expediente
                         do {
                             System.out.println("Introduce el número de expediente del alumno:");
@@ -235,6 +215,7 @@ public class MenuAdministrador {
                             alergias.add("Pescado");
                             break;
                         case 0:
+                            System.out.println("Alergias seleccionadas" + alergias);
                             System.out.println("Saliendo del seleccionador de alergias...");
                             break;
                         default:
@@ -250,8 +231,11 @@ public class MenuAdministrador {
     }
 
     //Seleccionar curso
-    public static void seleccionarCurso(String cursom, String curso) {
-        while (!cursom.equals("0")) {
+    public static String seleccionarCurso() {
+        String cursom;
+        String curso = null;
+
+        do {
             System.out.println("==== Selección de Curso ====");
             System.out.println("1. 1ºESO");
             System.out.println("2. 2ºESO");
@@ -267,21 +251,22 @@ public class MenuAdministrador {
                         case 1:
                             System.out.println("Curso seleccionado: 1ºESO");
                             curso = "1ºESO";
+                            System.out.println("Curso:" + curso);
                             break;
                         case 2:
                             System.out.println("Curso seleccionado: 2ºESO");
                             curso = "2ºESO";
+                            System.out.println("Curso:" + curso);
                             break;
                         case 3:
                             System.out.println("Curso seleccionado: 3ºESO");
                             curso = "3ºESO";
+                            System.out.println("Curso:" + curso);
                             break;
                         case 4:
                             System.out.println("Curso seleccionado: 4ºESO");
                             curso = "4ºESO";
-                            break;
-                        case 0:
-                            System.out.println("Saliendo del seleccionador de cursos...");
+                            System.out.println("Curso:" + curso);
                             break;
                         default:
                             System.out.println("Curso no válido");
@@ -292,6 +277,8 @@ public class MenuAdministrador {
                     System.out.println("El valor no es numérico, introduce un valor numérico.");
                 }
             }
-        }
+        }while (curso == null);
+
+        return curso;
     }
 }
