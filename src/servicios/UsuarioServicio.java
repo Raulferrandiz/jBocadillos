@@ -1,5 +1,6 @@
 package servicios;
 
+import data.GesData;
 import modelos.Administrador;
 import modelos.Alumno;
 import modelos.Cocina;
@@ -83,9 +84,6 @@ public class UsuarioServicio implements Crud {
 
         }
 
-        for (Usuario u:listaUsuarios){
-            System.out.println(u.getUsuario());
-        }
 
         return listaUsuarios;
     }
@@ -94,7 +92,7 @@ public class UsuarioServicio implements Crud {
         try{
             FileOutputStream fos = new FileOutputStream("src/persistencia/Usuarios.dat");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-
+            System.out.println("Añadiendo: "+nuevo.getNombre());
             oos.writeObject(nuevo);
 
             fos.close();
@@ -108,17 +106,23 @@ public class UsuarioServicio implements Crud {
         }catch (IOException e){
             e.getMessage();
         }
+
+
+
+
+
     }
 
     public void volcarLista(){
+
         try{
             FileOutputStream fos = new FileOutputStream("src/persistencia/Usuarios.dat");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            for (Usuario u: listaUsuarios){
-                oos.writeObject(u);
-            }//LA PRIMERA VEZ: Crea un administrador
-            oos.writeObject(new Administrador("Lala", "lola", "perez", "lola@gmail.com", "12345", LocalDate.now()));
 
+            //oos.writeObject(new Administrador("Lala", "lola", "perez", "lola@gmail.com", "12345", LocalDate.now()));
+            for(Usuario u: GesData.listaUsuarios){
+                oos.writeObject(u);
+            }
             fos.close();
             oos.flush();
             oos.close();

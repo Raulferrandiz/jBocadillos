@@ -23,16 +23,19 @@ public class MenuAutenticar {
                        usuarioActivo = AuthService.login();
                         break;
                     case "2":
-                        //usuarioActivo = AuthService.login();
+                        System.out.println("Sin funcionalidad");
                         break;
+
+                        //TODO case "0"  System.exit(0)
                 }
             } catch (InputMismatchException e){
                 System.out.println("Debes introducir un valor entero");
-                entrada.nextLine();
+               // entrada.nextLine();
             }
 
-        }while (usuarioActivo!=null);
+        }while (usuarioActivo==null);
         //Sesion.iniciarSesion(usuarioActivo);
+
         return usuarioActivo;
     }
 }

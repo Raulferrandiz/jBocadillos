@@ -1,18 +1,18 @@
 package ui;
 
+import autenticar.AuthService;
+
 import java.util.Scanner;
 
 public class MenuPrincipal {
     static Scanner sc = new Scanner(System.in);
-    public static void menu(){
+    public static void menuInicio(){
         String inicio = "";
         do {
 
             System.out.println("===== Menú de Inicio =====");
-            System.out.println("1. Gestionar Usuarios");
-            System.out.println("2. Gestionar Bocadillos");
-            System.out.println("3. Realizar Pedido");
-            System.out.println("4. Consultar Pedidos");
+            System.out.println("1. Iniciar Sesión");
+            System.out.println("2. Recuperar contraseña");
             System.out.println("0. Salir");
             System.out.println("Selecciona una opción:");
 
@@ -24,8 +24,8 @@ public class MenuPrincipal {
                     int ini = Integer.parseInt(inicio);
                     switch (ini) {
                         case 1:
-                            System.out.println("Opción seleccionada: Gestionar Usuarios");
-
+                            System.out.println("Opción seleccionada: Iniciar Sesión");
+                            AuthService.login();
                             break;
                         case 2:
                             System.out.println("Opción seleccionada: Gestionar Bocadillos");

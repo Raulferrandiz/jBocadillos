@@ -12,7 +12,7 @@ public class AuthService {
     public static Usuario login(){
         String usuario = "";
         String password = "";
-        Usuario logueado = null;
+
         do {
            System.out.println("===LOGIN DE USUARIO===");
            System.out.println("Introduce tu nombre de ususario:");
@@ -25,7 +25,7 @@ public class AuthService {
 
         for (Usuario item : GesData.listaUsuarios) {
             if (item!= null) {
-                if (item.getUsuario().equals(usuario) && item.getPassword().equals(password)){
+                if (item.getUsuario().equalsIgnoreCase(usuario) && item.getPassword().equals(password)){
                     System.out.println("USUARIO ENCONTRADO");
                     return item;
                 }

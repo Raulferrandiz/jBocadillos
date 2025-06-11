@@ -3,6 +3,7 @@ package modelos;
 
 
 public class Bocadillo {
+    /*
     private int id;
     private String nombre;
     private boolean es_caliente;
@@ -85,4 +86,6 @@ public class Bocadillo {
         }
 
     }
+
+     */
 }

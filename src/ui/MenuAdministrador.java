@@ -1,5 +1,6 @@
 package ui;
 
+import data.GesData;
 import modelos.Administrador;
 import modelos.Alumno;
 import modelos.Cocina;
@@ -41,7 +42,7 @@ public class MenuAdministrador {
                             break;
                         case 3:
                             System.out.println("Opción seleccionada: Crear Usuario");
-
+                            crearUsuario();
                             break;
                         case 0:
                             System.out.println("Gracias por usar mi programa");
@@ -125,6 +126,26 @@ public class MenuAdministrador {
 
             rolm = sc.nextLine();
 
+            /*switch (rolm){
+                case "1":
+                    System.out.println("Rol seleccionado: ALUMNO");
+                    //Seleccionar alergias
+                    seleccionarAlergias(alergias, alergiasm);
+                    // Seleccionar curso
+                    seleccionarCurso(cursom, curso);
+                    // Número de expediente
+                    do {
+                        System.out.println("Introduce el número de expediente del alumno:");
+                        num_expediente = sc.nextLine();
+                    } while (!Validaciones.esNum(num_expediente));
+                    nuevo = new Alumno(usuario, nombre, apellidos, email, password, fecha_nacimiento, alergias, curso, num_expediente);
+                    break;
+                case "2"
+
+
+            }*/
+
+
             // Validar que se haya seleccionado una opción válida
             if (rolm.equals("1") || rolm.equals("2") || rolm.equals("3")) {
                 opcionValidaSeleccionada = true;
@@ -142,6 +163,7 @@ public class MenuAdministrador {
                             num_expediente = sc.nextLine();
                         } while (!Validaciones.esNum(num_expediente));
                         nuevo = new Alumno(usuario, nombre, apellidos, email, password, fecha_nacimiento, alergias, curso, num_expediente);
+
                         break;
                     case 2:
                         System.out.println("Rol seleccionado: COCINERA");
@@ -173,7 +195,11 @@ public class MenuAdministrador {
 
 
         if (nuevo != null){
-            UsuarioServicio.insertarUsuario(nuevo);
+            UsuarioServicio usuarioServicio = new UsuarioServicio();
+            System.out.println("Añadiendo usuario a fichero...");
+            GesData.listaUsuarios.add(nuevo);
+            //UsuarioServicio.insertarUsuario(nuevo);
+            usuarioServicio.volcarLista();
         }
 
     }
@@ -185,6 +211,7 @@ public class MenuAdministrador {
             System.out.println("2. Lactosa");
             System.out.println("3. Sésamo");
             System.out.println("4. Pescado");
+            System.out.println("0. Salir");
             alergiasm = sc.nextLine();
 
             if (alergiasm.length() < 2) {

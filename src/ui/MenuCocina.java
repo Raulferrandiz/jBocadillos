@@ -11,8 +11,8 @@ public class MenuCocina {
         do {
 
             System.out.println("===== Menú de COCINERA=====");
-            System.out.println("1. VER PEDIDOS");
-            System.out.println("2. Gestionar Bocadillos");
+            System.out.println("1. Ver Pedidos");
+            System.out.println("2. ");
             System.out.println("3. Crear Usuario");
             System.out.println("0. Salir");
             System.out.println("Selecciona una opción:");

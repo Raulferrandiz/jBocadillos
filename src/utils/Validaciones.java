@@ -4,42 +4,49 @@ public class Validaciones {
 
     public static boolean esNum(String cadena) {
 
-        for (int i = 0; i < cadena.length(); i++) {
-            if (cadena.charAt(i) < '0' || cadena.charAt(i) > '9')
-                return false;
+        if (cadena != null){
+            for (int i = 0; i < cadena.length(); i++) {
+                if (cadena.charAt(i) < '0' || cadena.charAt(i) > '9')
+                    return false;
+            }
+
+            return true;
+        } else if (cadena == null) {
+            return false;
         }
-
-        return true;
-
+        return false;
     }
 
 
     public static boolean valNombre(String nombre) {
 
-        //Mínimo 3 carcteres
-        if (nombre.length() < 3) {
-            System.out.println("El nombre o apellido tiene que tener como mínimo 3 caracteres");
-            return false;
-        }
-
-        nombre = nombre.toLowerCase();
-
-        //Si tiene algun caracter que no este entre la a o z mayuscula o minuscula o alguno de los especiales especificados a algo devuelve error
-        for (int i = 0; i < nombre.length(); i++) {
-            if ((nombre.charAt(i) < 'a' || nombre.charAt(i) > 'z') && //ó
-                    (nombre.charAt(i) != 'á'
-                            && nombre.charAt(i) != 'é'
-                            && nombre.charAt(i) != 'i'
-                            && nombre.charAt(i) != 'ó'
-                            && nombre.charAt(i) != 'ú'
-                            && nombre.charAt(i) != 'ñ'
-                    )) {
-                System.out.println("El nombre o apellido solo puede contener letras");
+        if (nombre != null){
+            //Mínimo 3 carcteres
+            if (nombre.length() < 3) {
+                System.out.println("El nombre o apellido tiene que tener como mínimo 3 caracteres");
                 return false;
             }
-        }
 
-        return true;
+            nombre = nombre.toLowerCase();
+
+            //Si tiene algun caracter que no este entre la a o z mayuscula o minuscula o alguno de los especiales especificados a algo devuelve error
+            for (int i = 0; i < nombre.length(); i++) {
+                if ((nombre.charAt(i) < 'a' || nombre.charAt(i) > 'z') && //ó
+                        (nombre.charAt(i) != 'á'
+                                && nombre.charAt(i) != 'é'
+                                && nombre.charAt(i) != 'i'
+                                && nombre.charAt(i) != 'ó'
+                                && nombre.charAt(i) != 'ú'
+                                && nombre.charAt(i) != 'ñ'
+                        )) {
+                    System.out.println("El nombre o apellido solo puede contener letras");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -97,26 +104,56 @@ public class Validaciones {
      * @return valida que la contraseña tenga como mínimo 8 caracteres, una mayuscula, una minuscula, un número y un caracter especial
      */
     public static boolean valContra(String contra) {
+        int condicion = 0;
+        if (contra != null) {
 
-        // Longitud mínima 8
-        if (contra.length() < 8) {
+            //Al menos una minúscula, rompe el bucle
+            for (int i = 0; i < contra.length(); i++) {
+                char letra = contra.charAt(i);
+
+                if (letra >= 'a' && letra <= 'z') {
+                    condicion++;
+                    break;
+                }
+            }
+
+            //Al menos una mayuscula, rompe el bucle
+            for (int i = 0; i < contra.length(); i++) {
+                char letra = contra.charAt(i);
+
+                if (letra >= 'A' && letra <= 'Z') {
+                    condicion++;
+                    break;
+                }
+            }
+
+            // Al menos un carácter especial, rompe el bucle
+            for (int i = 0; i < contra.length(); i++) {
+                char letra = contra.charAt(i);
+
+                if (!(letra >= 'A' && letra <= 'Z') && !(letra >= 'a' && letra <= 'z') && !(letra >= '0' && letra <= '9')) {
+                    condicion++;
+                    break;
+                }
+            }
+
+            //Al menos un número, rompe el bucle
+            for (int i = 0; i < contra.length(); i++) {
+                char letra = contra.charAt(i);
+
+                if (letra >= '0' && letra <= '9') {
+                    condicion++;
+                    break;
+                }
+            }
+
+            if (condicion == 4) {
+                return true;
+            }
+
             return false;
         }
-
-        // Si se rompen los 4 bucles la contrseña tiene el formato correcto
-        int condicion = 0;
-
-        // Al menos una Mayúscula, rompe el bucle
-        for (int i = 0; i < contra.length(); i++) {
-            char letra = contra.charAt(i);
-
-            if (letra >= 'A' && letra <= 'Z') {
-                condicion++;
-                break;
-            }
-        }
-
-        return true;
+        return false;
     }
 
         /**

@@ -1,9 +1,10 @@
 package modelos;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-public abstract class Usuario {
+public abstract class Usuario implements Serializable {
     private String usuario; // nombre usaurio
     private String nombre;
     private String apellidos;

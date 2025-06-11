@@ -22,29 +22,37 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
     //static Bocadillo lista_semana[] = new Bocadillo[10];
     public static void main(String[] args) throws IOException {
-        //UsuarioServicio usuarioServicio = new UsuarioServicio();
-        //usuarioServicio.volcarLista();
         UsuarioServicio usuarioServicio = new UsuarioServicio();
+        //usuarioServicio.volcarLista();
+      //  UsuarioServicio usuarioServicio = new UsuarioServicio();
 
         // Llamar al método volcarLista() para volcar los usuarios al archivo
-        usuarioServicio.volcarLista();;
+        //usuarioServicio.volcarLista();
 
-        try {
+
+      /*  try {
             // Llamar al método obtenerUsuarios y obtener la lista de usuarios
             List<Usuario> usuarios = usuarioServicio.obtenerUsuarios();
-
+            System.out.println(usuarios.size());
             // Mostrar los usuarios obtenidos
             for (Usuario usuario : usuarios) {
                 System.out.println(usuario.getUsuario());  // Imprime el nombre del usuario (o cualquier propiedad)
             }
         } catch (IOException e) {
             System.out.println("Error al obtener los usuarios: " + e.getMessage());
-        }
+        }*/
+        //contra: 12345Aa#
 
         GesData.cargarUsuarios();
         Usuario activo;
 
+        List<Usuario> usuarios = usuarioServicio.obtenerUsuarios();
+        System.out.println(usuarios.size());
+        for(Usuario u: GesData.listaUsuarios) System.out.println(u.getNombre());
+
         activo = MenuAutenticar.menuAuth();
+        System.out.println("Main"+activo.getNombre());
+
         if (activo==null){
             System.out.println("NO ESTÁS EN EL SISTEMA");
         } else if (activo instanceof Alumno) {
