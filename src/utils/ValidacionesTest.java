@@ -12,7 +12,9 @@ class ValidacionesTest {
         assertFalse(Validaciones.esNum("aa"));
         assertFalse(Validaciones.esNum(null));
         assertFalse(Validaciones.esNum(" "));
+        assertFalse(Validaciones.esNum("         "));
         assertFalse(Validaciones.esNum(".2"));
+        assertFalse(Validaciones.esNum("#########"));
         assertFalse(Validaciones.esNum("."));
 
         assertTrue(Validaciones.esNum("2"));
@@ -26,8 +28,11 @@ class ValidacionesTest {
         assertFalse(Validaciones.valNombre("...."));
         assertFalse(Validaciones.valNombre("    "));
         assertFalse(Validaciones.valNombre("2222"));
+        assertFalse(Validaciones.valNombre("           "));
+        assertFalse(Validaciones.valNombre("22222eeeeeee"));
 
         assertTrue(Validaciones.valNombre("eeee"));
+        assertTrue(Validaciones.valNombre("EEEEE"));
     }
 
     // valida que la contraseña tenga como mínimo 8 caracteres, una mayuscula, una minuscula, un número y un caracter especial

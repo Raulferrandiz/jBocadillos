@@ -35,7 +35,7 @@ public class MenuAdministrador {
                     switch (ini) {
                         case 1:
                             System.out.println("Opción seleccionada: Gestionar Usuarios");
-
+                            gestionarUsuarios();
                             break;
                         case 2:
                             System.out.println("Opción seleccionada: Gestionar Bocadillos");
@@ -60,6 +60,57 @@ public class MenuAdministrador {
 
         } while (!inicio.equals("0"));
 
+    }
+
+    public static void gestionarUsuarios(){
+        String inicio = "";
+        do {
+
+            System.out.println("===== Gestion de Usuarios =====");
+            System.out.println("1. Crear Usuarios");
+            System.out.println("2. Buscar Usuario");
+            System.out.println("3. Ver todos los Usuarios");
+            System.out.println("4. Eliminar un Usuario");
+            System.out.println("0. Volver al Menú de Administrador");
+            System.out.println("Selecciona una opción:");
+
+            inicio = sc.nextLine();
+
+            if (inicio.length() < 2) {
+                if (inicio.length() > 0 && Validaciones.esNum(inicio)) {
+                    //Aqui se cambia el valor del inico a entero
+                    int ini = Integer.parseInt(inicio);
+                    switch (ini) {
+                        case 1:
+                            System.out.println("Opción seleccionada: Crear Usuarios");
+                            crearUsuario();
+                            break;
+                        case 2:
+                            System.out.println("Opción seleccionada: Gestionar Bocadillos");
+                            break;
+                        case 3:
+                            System.out.println("Opción seleccionada: Crear Usuario");
+                            crearUsuario();
+                            break;
+                        case 4:
+                            System.out.println("Opción seleccionada: Crear Usuario");
+
+                            break;
+                        case 0:
+                            System.out.println("Volviendo ...");
+                            menuAdmin();
+                            break;
+                        default:
+                            System.out.println("Opción no válida");
+                    }
+                } else if (inicio.length() == 0) {
+                    System.out.println("No has ingresado ninguna opción");
+                } else {
+                    System.out.println("El valor no es númerico, introduce un valor númerico.");
+                }
+            }
+
+        } while (!inicio.equals("0"));
     }
 
     public static void crearUsuario(){
@@ -280,5 +331,9 @@ public class MenuAdministrador {
         }while (curso == null);
 
         return curso;
+    }
+
+    public static void eliminarUsuario() {
+
     }
 }

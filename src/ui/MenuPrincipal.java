@@ -28,14 +28,8 @@ public class MenuPrincipal {
                             AuthService.login();
                             break;
                         case 2:
-                            System.out.println("Opción seleccionada: Gestionar Bocadillos");
+                            System.out.println("Opción seleccionada: Recuperar contraseña");
                             break;
-                        case 3:
-                            System.out.println("Opción seleccionada: Realizar Pedido");
-
-                            break;
-                        case 4:
-                            System.out.println("Opción seleccionada: Consultar Pedidos");
                         case 0:
                             System.out.println("Gracias por usar mi programa");
                             System.out.println("Saliendo...");
