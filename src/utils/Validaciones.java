@@ -164,6 +164,22 @@ public class Validaciones {
         return false;
     }
 
+    public static boolean valPrecio (String preciom) {
+
+        String valores[]=preciom.split(".");
+
+        if(valores.length != 2){
+            System.out.println("Solo puedes poner 2 decimales");
+            return false;
+        }
+
+        if(esNum(valores[0]) && esNum(valores[1])) {
+            System.out.println("Solo se permiten números");
+            return true;
+        }
+        return false;
+    }
+
         /**
          * @param dn
          * @return devuelve falso cuando el dni no tiene 9 caracteres de longitud, también devuelve falso si los primeros 8 caracteres no son numeros, y si el ultimo caracter no es una letra mayuscula

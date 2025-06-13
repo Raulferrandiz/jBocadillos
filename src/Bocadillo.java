@@ -1,6 +1,8 @@
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Bocadillo {
+public class Bocadillo implements Serializable {
     private int id;
     private String nombre;
     private boolean es_caliente;

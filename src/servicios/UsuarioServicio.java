@@ -81,9 +81,7 @@ public class UsuarioServicio implements Crud {
             }catch (IOException e){
                 e.printStackTrace();
             }
-
         }
-
 
         return listaUsuarios;
     }
@@ -106,11 +104,6 @@ public class UsuarioServicio implements Crud {
         }catch (IOException e){
             e.getMessage();
         }
-
-
-
-
-
     }
 
     public void volcarLista(){

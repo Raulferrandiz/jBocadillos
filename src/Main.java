@@ -11,8 +11,10 @@ import java.util.Scanner;
 
 import modelos.Administrador;
 import modelos.Alumno;
+import modelos.Bocadillo;
 import modelos.Cocina;
 import modelos.Usuario;
+import servicios.BocadilloServicio;
 import servicios.UsuarioServicio;
 import ui.MenuAdministrador;
 import ui.MenuAlumno;
@@ -23,6 +25,7 @@ public class Main {
     //static Bocadillo lista_semana[] = new Bocadillo[10];
     public static void main(String[] args) throws IOException {
         UsuarioServicio usuarioServicio = new UsuarioServicio();
+        BocadilloServicio bocadilloServicio = new BocadilloServicio();
         //usuarioServicio.volcarLista();
       //  UsuarioServicio usuarioServicio = new UsuarioServicio();
 
@@ -42,13 +45,18 @@ public class Main {
             System.out.println("Error al obtener los usuarios: " + e.getMessage());
         }*/
         //contra: 12345Aa#
+        bocadilloServicio.volcarLista();
 
-        GesData.cargarUsuarios();
-        Usuario activo;
+        //GesData.cargarUsuarios();
+        GesData.cargarBocadillos();
+         Usuario activo;
 
-        List<Usuario> usuarios = usuarioServicio.obtenerUsuarios();
-        System.out.println(usuarios.size());
-        for(Usuario u: GesData.listaUsuarios) System.out.println(u.getNombre());
+        //List<Usuario> usuarios = usuarioServicio.obtenerUsuarios();
+        List<Bocadillo> bocadillos = bocadilloServicio.obtenerBocadillos();
+        System.out.println(bocadillos.size());
+        for(Bocadillo b: GesData.listaBocadillos) System.out.println(b.getNombre());
+
+        //for(Usuario u: GesData.listaUsuarios) System.out.println(u.getNombre());
 
         activo = MenuAutenticar.menuAuth();
         System.out.println("Main"+activo.getNombre());

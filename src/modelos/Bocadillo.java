@@ -1,17 +1,19 @@
 package modelos;
 
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Bocadillo {
-    /*
+public class Bocadillo implements Serializable {
     private int id;
     private String nombre;
     private boolean es_caliente;
-    private String[] ingredientes;
-    private String[] alergenos;
+    private List<String> ingredientes = new ArrayList<>();
+    private List<String> alergenos = new ArrayList<>();
     private double precio;
 
-    public Bocadillo(int id, String nombre, boolean es_caliente, String[] ingredientes, String[] alergenos, double precio) {
+    public Bocadillo(int id, String nombre, boolean es_caliente, List<String> ingredientes, List<String> alergenos, double precio) {
         this.id = id;
         this.nombre = nombre;
         this.es_caliente = es_caliente;
@@ -44,19 +46,19 @@ public class Bocadillo {
         this.es_caliente = es_caliente;
     }
 
-    public String[] getIngredientes() {
+    public List<String> getIngredientes() {
         return ingredientes;
     }
 
-    public void setIngredientes(String[] ingredientes) {
+    public void setIngredientes(List<String> ingredientes) {
         this.ingredientes = ingredientes;
     }
 
-    public String[] getAlergenos() {
+    public List<String> getAlergenos() {
         return alergenos;
     }
 
-    public void setAlergenos(String[] alergenos) {
+    public void setAlergenos(List<String> alergenos) {
         this.alergenos = alergenos;
     }
 
@@ -74,18 +76,16 @@ public class Bocadillo {
         else System.out.println("Tipo: Frío ");
         if (ingredientes != null) {
             System.out.println("Ingredientes: ");
-            for (int i = 0; i < ingredientes.length; i++) {
-                System.out.println("\t *" + ingredientes[i]);
+            for (int i = 0; i < ingredientes.size(); i++) {
+                System.out.println("\t *" + ingredientes.get(i));
             }
         }
         if (alergenos != null) {
             System.out.println("Ingredientes: ");
-            for (int i = 0; i < alergenos.length; i++) {
-                System.out.println("\t *" + alergenos[i]);
+            for (int i = 0; i < alergenos.size(); i++) {
+                System.out.println("\t *" + alergenos.get(i));
             }
         }
 
     }
-
-     */
 }

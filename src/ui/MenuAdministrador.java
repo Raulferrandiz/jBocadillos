@@ -1,10 +1,9 @@
 package ui;
 
+import autenticar.AuthService;
 import data.GesData;
-import modelos.Administrador;
-import modelos.Alumno;
-import modelos.Cocina;
-import modelos.Usuario;
+import modelos.*;
+import servicios.BocadilloServicio;
 import servicios.UsuarioServicio;
 import utils.Validaciones;
 
@@ -23,7 +22,7 @@ public class MenuAdministrador {
             System.out.println("1. Gestionar Usuarios");
             System.out.println("2. Gestionar Bocadillos");
             System.out.println("3. Crear Usuario");
-            System.out.println("0. Salir");
+            System.out.println("0. Cerrar Sesión");
             System.out.println("Selecciona una opción:");
 
             inicio = sc.nextLine();
@@ -39,6 +38,7 @@ public class MenuAdministrador {
                             break;
                         case 2:
                             System.out.println("Opción seleccionada: Gestionar Bocadillos");
+                            gestionarBocadillos();
                             break;
                         case 3:
                             System.out.println("Opción seleccionada: Crear Usuario");
@@ -47,6 +47,7 @@ public class MenuAdministrador {
                         case 0:
                             System.out.println("Gracias por usar mi programa");
                             System.out.println("Saliendo...");
+                            AuthService.login();
                             break;
                         default:
                             System.out.println("Opción no válida");
@@ -224,7 +225,6 @@ public class MenuAdministrador {
             System.out.println("Número de expediente: " + num_expediente);
         }
 
-
         if (nuevo != null){
             UsuarioServicio usuarioServicio = new UsuarioServicio();
             System.out.println("Añadiendo usuario a fichero...");
@@ -334,6 +334,173 @@ public class MenuAdministrador {
     }
 
     public static void eliminarUsuario() {
+
+    }
+
+    public static void gestionarBocadillos(){
+        String inicio = "";
+        do {
+
+            System.out.println("===== Gestion de Bocadillos =====");
+            System.out.println("1. Crear Bocadillo");
+            System.out.println("2. Buscar Bocadillo");
+            System.out.println("3. Ver todos los Usuarios");
+            System.out.println("4. Eliminar un Usuario");
+            System.out.println("0. Volver al Menú de Administrador");
+            System.out.println("Selecciona una opción:");
+
+            inicio = sc.nextLine();
+
+            if (inicio.length() < 2) {
+                if (inicio.length() > 0 && Validaciones.esNum(inicio)) {
+                    //Aqui se cambia el valor del inico a entero
+                    int ini = Integer.parseInt(inicio);
+                    switch (ini) {
+                        case 1:
+                            System.out.println("Opción seleccionada: Crear Bocadillo");
+                            crearBocadillo();
+                            break;
+                        case 2:
+                            System.out.println("Opción seleccionada: Gestionar Bocadillos");
+                            break;
+                        case 3:
+                            System.out.println("Opción seleccionada: Crear Usuario");
+                            crearUsuario();
+                            break;
+                        case 4:
+                            System.out.println("Opción seleccionada: Crear Usuario");
+
+                            break;
+                        case 0:
+                            System.out.println("Volviendo ...");
+                            menuAdmin();
+                            break;
+                        default:
+                            System.out.println("Opción no válida");
+                    }
+                } else if (inicio.length() == 0) {
+                    System.out.println("No has ingresado ninguna opción");
+                } else {
+                    System.out.println("El valor no es númerico, introduce un valor númerico.");
+                }
+            }
+
+        } while (!inicio.equals("0"));
+    }
+
+    public static void crearBocadillo(){
+        Bocadillo nuevo = null;
+        int id = 0;
+        String nombre;
+        boolean es_caliente = false;
+        String calientem;
+        List<String> ingredientes = new ArrayList<>();
+        String ingredientem;
+        List<String> alergenos = new ArrayList<>();
+        String alergenosm = "";
+        double precio = 0;
+        String preciom = "";
+
+        System.out.println("==== Crear Bocadillo ====");
+
+        //Nombre
+        do {
+            System.out.println("Ingrese un nombre para el Bocadillo:");
+            nombre = sc.nextLine();
+        } while (!Validaciones.valNombre(nombre));
+
+        // ¿Es caliente o frío?
+        int opcion = 0;
+        do {
+            System.out.println("Selecciona el tipo de bocadillo:");
+            System.out.println("1. Caliente");
+            System.out.println("2. Frío");
+
+            calientem = sc.nextLine();
+
+            if (calientem.length() < 2) {
+                if (calientem.length() > 0 && Validaciones.esNum(calientem)) {
+                    int ini2 = Integer.parseInt(calientem);
+                    switch (ini2) {
+                        case 1:
+                            System.out.println("El Bocadillo es Caliente");
+                            es_caliente = true;
+                            break;
+                        case 2:
+                            System.out.println("El Bocadillo es Frío");
+                            es_caliente = false;
+                            break;
+                        default:
+                            System.out.println("Opción no válida");
+                    }
+                } else if (calientem.length() == 0) {
+                    System.out.println("No has ingresado ninguna opción");
+                } else {
+                    System.out.println("El valor no es numérico, introduce un valor numérico.");
+                }
+            }
+        } while (!calientem.equals("1") && !calientem.equals("2"));
+
+        //Añadir ingredientes
+        System.out.println("Ingresa los Ingredientes del Bocadillo:");
+        System.out.println("Para salir introduce la palabra 'fin' ");
+        do {
+            ingredientem = sc.nextLine();
+
+                if (calientem.length() > 0 && Validaciones.valNombre(ingredientem)) {
+                    System.out.println("Se ha añadido a la lista de ingredientes: " + ingredientem);
+                    System.out.println("Introduce otro ingrediente o termina con 'fin'");
+                    ingredientes.add(ingredientem);
+
+                } else if (calientem.length() == 0) {
+                    System.out.println("No has ingresado ningún ingrediente");
+                }
+
+        } while (!ingredientem.equals("fin"));
+
+
+        //Añadir alergias
+        seleccionarAlergias(alergenos, alergenosm);
+
+        //Precio del Bocadillo
+        do {
+            System.out.println("Introduce el Precio del Bocadillo: ");
+            preciom = sc.nextLine();
+            if (!Validaciones.valPrecio(preciom)){
+                precio = Double.parseDouble(preciom);
+                System.out.println(preciom);
+                System.out.println("El precio del Bocadillo es: " + precio);
+            }
+        }while (Validaciones.valPrecio(preciom));
+
+        System.out.println("==== Datos del Bocadillo ====");
+        System.out.println("Nombre del Bocadillo: " + nombre);
+        if (es_caliente) {
+            System.out.println("El Bocadillo es Caliente");
+        } else if (!es_caliente) {
+            System.out.println("El Bocadillo es Frío");
+        }
+        System.out.println("Ingredientes: " + ingredientes);
+        System.out.println("Alergenos: " + alergenos);
+        System.out.println("El Precio es: " + precio);
+
+        System.out.println("¿Son correctos los datos? (S/N)");
+        String correcto = sc.nextLine();
+
+        if (correcto.equals("S")) {
+            if (nuevo != null){
+                BocadilloServicio bocadilloServicio = new BocadilloServicio();
+                System.out.println("Añadiendo bocadillo a fichero...");
+                GesData.listaBocadillos.add(nuevo);
+                //UsuarioServicio.insertarUsuario(nuevo);
+                bocadilloServicio.volcarLista();
+            }
+        } else if (correcto.equals("N")) {
+            crearBocadillo();
+        } else {
+            System.out.println("No es una opción válida");
+        }
+
 
     }
 }

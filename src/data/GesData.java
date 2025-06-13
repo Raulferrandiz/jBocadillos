@@ -1,5 +1,7 @@
 package data;
+import modelos.Bocadillo;
 import modelos.Usuario;
+import servicios.BocadilloServicio;
 import servicios.UsuarioServicio;
 
 import java.io.IOException;
@@ -7,12 +9,12 @@ import java.util.List;
 
 public class GesData {
     public static List<Usuario> listaUsuarios;
+    public static List<Bocadillo> listaBocadillos;
     private static UsuarioServicio usuarioServicio = new UsuarioServicio();
+    private static BocadilloServicio bocadilloServicio = new BocadilloServicio();
 
-    public static void cargarBocadillos(){
-        //lista_semana[0] = new Bocadillo(1, "Bocadillo de Jamón", false, new String[]{"Pan", "Jamón"}, new String[]{"Gluten"}, 3.50);
-        //lista_semana[1] = new Bocadillo(2, "Bocadillo de Pollo", true, new String[]{"Pan", "Pollo"}, new String[]{"Gluten", "Huevo"}, 4.00);
-        System.out.println("✅ Bocadillos Creados");
+    public static void cargarBocadillos() throws IOException {
+        listaBocadillos = bocadilloServicio.obtenerBocadillos();
     }
     public static void cargarPedidos(){
 
