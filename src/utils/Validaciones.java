@@ -1,7 +1,17 @@
 package utils;
 
+/**
+ * En esta clase se encuentran las validaciones para comprobar distintos datos que tiene que introdicir el ususario
+ * @author Raúl Ferrándiz Sáez
+ * @version 1.1
+ */
 public class Validaciones {
 
+    /**
+     * comprueba que una cadena solo use números
+     * @param cadena
+     * @return true si solo tiene números y false si tiene algun caracter que no sea un número
+     */
     public static boolean esNum(String cadena) {
 
         if (cadena != null){
@@ -9,7 +19,6 @@ public class Validaciones {
                 if (cadena.charAt(i) < '0' || cadena.charAt(i) > '9')
                     return false;
             }
-
             return true;
         } else if (cadena == null) {
             return false;
@@ -17,7 +26,11 @@ public class Validaciones {
         return false;
     }
 
-
+    /**
+     * comprueba que un nombre solo contenga letras, y tenga como mínimo 3
+     * @param nombre
+     * @return true si contiene 3 caracteres como mínimo y todos son letras, false si no cumple alguna de estas condiciones
+     */
     public static boolean valNombre(String nombre) {
 
         if (nombre != null){
@@ -50,8 +63,9 @@ public class Validaciones {
     }
 
     /**
+     * comprueba que el correo tenga un @, texto delante de ese @, texto después de ese @ y texto antes y después del punto
      * @param email
-     * @return devuelve falso si no cumple alguna de las condiciones especificadas
+     * @return true si cumple todas las condiciones, false si no cumple todas
      */
     public static boolean valEmail(String email) {
 
@@ -100,7 +114,7 @@ public class Validaciones {
     }
 
     /**
-     * @param contra
+     * @param contra (contraseña para verificar)
      * @return valida que la contraseña tenga como mínimo 8 caracteres, una mayuscula, una minuscula, un número y un caracter especial
      */
     public static boolean valContra(String contra) {

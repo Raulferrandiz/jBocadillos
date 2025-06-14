@@ -12,14 +12,16 @@ public class Bocadillo implements Serializable {
     private List<String> ingredientes = new ArrayList<>();
     private List<String> alergenos = new ArrayList<>();
     private double precio;
+    private String dia;
 
-    public Bocadillo(int id, String nombre, boolean es_caliente, List<String> ingredientes, List<String> alergenos, double precio) {
+    public Bocadillo(int id, String nombre, boolean es_caliente, List<String> ingredientes, List<String> alergenos, double precio, String dia) {
         this.id = id;
         this.nombre = nombre;
         this.es_caliente = es_caliente;
         this.ingredientes = ingredientes;
         this.alergenos = alergenos;
         this.precio = precio;
+        this.dia = dia;
     }
 
     public int getId() {
@@ -68,6 +70,14 @@ public class Bocadillo implements Serializable {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
     }
 
     public void mostrarInfo() {

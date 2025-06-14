@@ -53,6 +53,11 @@ public class UsuarioServicio implements Crud {
         return listaUsuarios;
     }
 
+    /**
+     * (nos devuelve la lista con todos los usuarios que se encuentran en el archivo de usuarios.dat)
+     * @return listaUsuarios
+     * @throws IOException
+     */
     //RECUPERAR TODOS LOS USUARIOS
     public List<Usuario> obtenerUsuarios() throws IOException {
         FileInputStream fis =null;
@@ -86,6 +91,10 @@ public class UsuarioServicio implements Crud {
         return listaUsuarios;
     }
 
+    /**
+     * Añade el usuario que le pasamos al archivo usuarios.dat
+     * @param nuevo
+     */
     public static void insertarUsuario (Usuario nuevo){
         try{
             FileOutputStream fos = new FileOutputStream("src/persistencia/Usuarios.dat");
@@ -106,6 +115,9 @@ public class UsuarioServicio implements Crud {
         }
     }
 
+    /**
+     * Imprime todos los usuarios de la lista de Usuarios.dat uno uno
+     */
     public void volcarLista(){
 
         try{
@@ -128,19 +140,14 @@ public class UsuarioServicio implements Crud {
         }
     }
 
+    //Estos no tienen funcionalidad aún
     //BUSCAR USUARIO POR ID
-    public Usuario buscar(String usuario){
-        for(Usuario itemUsuario : listaUsuarios ){
-            if(itemUsuario.getUsuario().equals(usuario)) return itemUsuario;
+    public Usuario buscar(String usuario) {
+        for (Usuario itemUsuario : listaUsuarios) {
+            if (itemUsuario.getUsuario().equals(usuario)) return itemUsuario;
         }
         System.out.println("El usuario no se encuentra almacenado");
         return null;
-    }
-    //INSERTAR UN NUEVO USUARIO
-
-    public void insertar(Usuario nuevo){
-        listaUsuarios.add(nuevo);
-        System.out.println("El usuario ha sido insertado");
     }
     //MODIFICAR
     public void modificar(Usuario modificado){
@@ -166,6 +173,5 @@ public class UsuarioServicio implements Crud {
         System.out.println("El usuario se ha eliminado");
 
     }
-
-
+    
 }

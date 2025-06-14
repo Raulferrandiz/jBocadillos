@@ -40,13 +40,12 @@ public class BocadilloServicio implements Crud {
                 e.printStackTrace();
             }
         }
-        System.out.println("Total Bocadillos:"+listaBocadillos.size());
         return listaBocadillos;
     }
 
     public static void insertarBocadillo (Bocadillo nuevo){
         try{
-            FileOutputStream fos = new FileOutputStream("src/persistencia/Bocadillo.dat");
+            FileOutputStream fos = new FileOutputStream("src/persistencia/Bocadillo2.dat");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             System.out.println("Añadiendo: "+nuevo.getNombre());
             nuevo.setId(autoincrementoBocataID());
@@ -94,7 +93,7 @@ public class BocadilloServicio implements Crud {
         try{
             FileOutputStream fos = new FileOutputStream("src/persistencia/Bocadillo2.dat");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(new Bocadillo(1, "Salchicha", true, ingredientes, alergenos, 2.10));
+            oos.writeObject(new Bocadillo(1, "Salchicha", true, ingredientes, alergenos, 2.10, "Sabado"));
             //oos.writeObject(new Administrador("Lala", "lola", "perez", "lola@gmail.com", "12345", LocalDate.now()));
 
             fos.close();

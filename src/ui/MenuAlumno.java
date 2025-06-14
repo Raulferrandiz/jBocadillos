@@ -1,5 +1,7 @@
 package ui;
 
+import data.GesData;
+import modelos.Bocadillo;
 import utils.Validaciones;
 
 import java.util.Scanner;
@@ -28,7 +30,7 @@ public class MenuAlumno {
                     switch (ini) {
                         case 1:
                             System.out.println("OPCIÓN SELECCIONADA = Pedir un Bocadillo");
-
+                            pedirBocadillo();
                             break;
                         case 2:
                             System.out.println("OPCIÓN SELECCIONADA = Ver Listado de Bocadillos");
@@ -52,5 +54,19 @@ public class MenuAlumno {
             }
 
         } while (!menuAlumno.equals("0"));
+    }
+
+    public static void pedirBocadillo(){
+        for(Bocadillo b: GesData.listaBocadillos) {
+            if (b.getDia().equals("Sabado")) {
+                System.out.print(b.getNombre() + ", Alergenos: " + b.getAlergenos() + ", Ingredientes: " + b.getIngredientes() + ", Precio: " + b.getPrecio());
+                if (b.isEs_caliente()) {
+                    System.out.print("Tipo: Caliente, ");
+                } else {
+                    System.out.println("Tipo: Frío, ");
+                }
+                System.out.println();
+            }
+        }
     }
 }

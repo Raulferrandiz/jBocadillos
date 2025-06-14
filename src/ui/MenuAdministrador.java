@@ -400,6 +400,7 @@ public class MenuAdministrador {
         String alergenosm = "";
         double precio = 0;
         String preciom = "";
+        String dia;
 
         System.out.println("==== Crear Bocadillo ====");
 
@@ -462,6 +463,9 @@ public class MenuAdministrador {
         //Añadir alergias
         seleccionarAlergias(alergenos, alergenosm);
 
+        //Añadir día
+        dia = seleccionarDia();
+
         //Precio del Bocadillo
         do {
             System.out.println("Introduce el Precio del Bocadillo: ");
@@ -483,9 +487,12 @@ public class MenuAdministrador {
         System.out.println("Ingredientes: " + ingredientes);
         System.out.println("Alergenos: " + alergenos);
         System.out.println("El Precio es: " + precio);
+        System.out.println("El Día es: " + dia);
 
         System.out.println("¿Son correctos los datos? (S/N)");
         String correcto = sc.nextLine();
+
+        nuevo = new Bocadillo(id, nombre, es_caliente, ingredientes, alergenos, precio, dia);
 
         if (correcto.equals("S")) {
             if (nuevo != null){
@@ -502,5 +509,68 @@ public class MenuAdministrador {
         }
 
 
+    }
+
+    public static String seleccionarDia() {
+        String diam;
+        String dia = null;
+
+        do {
+            System.out.println("==== Selecciona el día de la Semana del Bocadillo ====");
+            System.out.println("1. Lunes");
+            System.out.println("2. Martes");
+            System.out.println("3. Miércoles");
+            System.out.println("4. Jueves");
+            System.out.println("5. Viernes");
+            System.out.println("6. Sabado");
+            diam = sc.nextLine();
+
+            if (diam.length() < 2) {
+                if (diam.length() > 0 && Validaciones.esNum(diam)) {
+                    // Convertir el valor de diam a entero
+                    int ini = Integer.parseInt(diam);
+                    switch (ini) {
+                        case 1:
+                            System.out.println("Día seleccionado: Lunes");
+                            dia = "Lunes";
+                            System.out.println("Día:" + dia);
+                            break;
+                        case 2:
+                            System.out.println("Día seleccionado: Martes");
+                            dia = "Martes";
+                            System.out.println("Día:" + dia);
+                            break;
+                        case 3:
+                            System.out.println("Día seleccionado: Miércoles");
+                            dia = "Miercoles";
+                            System.out.println("Día:" + dia);
+                            break;
+                        case 4:
+                            System.out.println("Día seleccionado: Jueves");
+                            dia = "Jueves";
+                            System.out.println("Día:" + dia);
+                            break;
+                        case 5:
+                            System.out.println("Día seleccionado: Viernes");
+                            dia = "Viernes";
+                            System.out.println("Día:" + dia);
+                            break;
+                        case 6:
+                            System.out.println("Día seleccionado: Sabado");
+                            dia = "Sabado";
+                            System.out.println("Día:" + dia);
+                            break;
+                        default:
+                            System.out.println("Día no válido");
+                    }
+                } else if (diam.length() == 0) {
+                    System.out.println("No has ingresado ninguna opción");
+                } else {
+                    System.out.println("El valor no es numérico, introduce un valor numérico.");
+                }
+            }
+        }while (dia == null);
+
+        return dia;
     }
 }
