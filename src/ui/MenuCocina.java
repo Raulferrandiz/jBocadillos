@@ -1,6 +1,8 @@
 package ui;
 
 import autenticar.MenuAutenticar;
+import data.GesData;
+import modelos.Pedido;
 import servicios.PedidoServicio;
 import utils.Validaciones;
 
@@ -32,6 +34,7 @@ public class MenuCocina {
                             break;
                         case 2:
                             System.out.println("Opción seleccionada: Entregar un Pedido");
+                            entregarPedido();
                             break;
                         case 0:
                             System.out.println("Cerrar Sesión");
@@ -51,7 +54,29 @@ public class MenuCocina {
 
     }
 
-    public void entregarPedido() {
+    public static void entregarPedido() {
+        pedidoServicio.listaPedidos();
+        System.out.println("Introduce el id del pedido que quieres entregar:");
+        String num = sc.nextLine();
+        if (Validaciones.esNum(num)){
+            int id_pedido = Integer.parseInt(num);
+            for (Pedido p : GesData.listaPedidos) {
+                if (p.getId_pedido() == id_pedido) {
+                    if (p.getEstado().equals("Entregado")) {
+                        System.out.println("El pedido ya fue entregado");
+                    } else {
+                        p.setEstado("Entregado");
+                        System.out.println("Pedido " + id_pedido + " entregado.");
+                        pedidoServicio.volcarLista();
+                    }
+                    return;
+                }
+            }
+            System.out.println("Pedido no encontrado.");
+        }else {
+            System.out.println("Valor no valido");
+        }
+
 
     }
 }

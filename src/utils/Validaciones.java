@@ -128,8 +128,6 @@ public class Validaciones {
                 if (letra >= 'a' && letra <= 'z') {
                     condicion++;
                     break;
-                } else {
-                    System.out.println("Falta una letra en Minúscula");
                 }
             }
 
@@ -140,8 +138,6 @@ public class Validaciones {
                 if (letra >= 'A' && letra <= 'Z') {
                     condicion++;
                     break;
-                } else {
-                    System.out.println("Falta una letra en Mayúscula");
                 }
             }
 
@@ -152,8 +148,6 @@ public class Validaciones {
                 if (!(letra >= 'A' && letra <= 'Z') && !(letra >= 'a' && letra <= 'z') && !(letra >= '0' && letra <= '9')) {
                     condicion++;
                     break;
-                } else {
-                    System.out.println("Falta un carácter especial");
                 }
             }
 
