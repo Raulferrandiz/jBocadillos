@@ -5,8 +5,10 @@ import modelos.*;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * En esta clase se encuentran metodos para gestionar cosas relacionadas con la clase pedidos, insertarlos, listarlos, etc
@@ -15,6 +17,7 @@ import java.util.List;
  */
 
 public class PedidoServicio {
+    public BocadilloServicio bocadilloServicio;
     //Se utiliza para almacenar los datos de la base de datos
     private List<Pedido> listaPedidos=new ArrayList<>();
 
@@ -147,7 +150,7 @@ public class PedidoServicio {
         }
     }
 
-    private static int autoincrementoPedidoID() {
+    public static int autoincrementoPedidoID() {
         int numeroLeido = 0;
         try {
             DataInputStream dis = new DataInputStream(new FileInputStream("src/persistencia/uidP.txt"));
@@ -168,6 +171,36 @@ public class PedidoServicio {
             System.out.println(e.getMessage());
         }
         return numeroLeido;
+    }
+
+    public void listaPedidos () {
+        for(Pedido p: GesData.listaPedidos) {
+            int id_bocadillo = p.getId_bocadillo();
+            String nombre = obtenerBocadilloId(id_bocadillo);
+            System.out.print("Fecha: " + p.getFecha() + ", Id pedidos: " + p.getId_pedido() + ", Bocadillo: " + nombre + ", Estado: " + p.getEstado());
+            System.out.println();
+        }
+    }
+
+    public static String obtenerBocadilloId(int id) {
+        for (Bocadillo b : GesData.listaBocadillos) {
+            if (b.getId() == id) {
+                return b.getNombre();
+            }
+        }
+        return "Bocadillo no encontrado";
+    }
+
+    /**
+     * Devuelve el día de la semana en español para la fecha actual.
+     *
+     * @return el nombre del día en español (por ejemplo, "lunes", "martes", etc.)
+     */
+    public static String obtenerDiaSemana() {
+        LocalDate fechaActual = LocalDate.now();
+        String dia = fechaActual.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+        String diam = dia.substring(0, 1).toUpperCase() + dia.substring(1).toLowerCase();
+        return diam;
     }
 
 

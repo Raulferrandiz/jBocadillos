@@ -17,7 +17,7 @@ public class BocadilloServicio implements Crud {
         FileInputStream fis =null;
         ObjectInputStream ois = null;
         try{
-            fis = new FileInputStream("src/persistencia/Bocadillo2.dat");
+            fis = new FileInputStream("src/persistencia/Bocadillo.dat");
             ois = new ObjectInputStream(fis);
             Bocadillo u;
             while (true){
@@ -45,7 +45,7 @@ public class BocadilloServicio implements Crud {
 
     public static void insertarBocadillo (Bocadillo nuevo){
         try{
-            FileOutputStream fos = new FileOutputStream("src/persistencia/Bocadillo2.dat");
+            FileOutputStream fos = new FileOutputStream("src/persistencia/Bocadillo.dat", true);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             System.out.println("Añadiendo: "+nuevo.getNombre());
             nuevo.setId(autoincrementoBocataID());
@@ -63,7 +63,7 @@ public class BocadilloServicio implements Crud {
         }
     }
 
-    private static int autoincrementoBocataID() {
+    public static int autoincrementoBocataID() {
         int numeroLeido = 0;
         try {
             DataInputStream dis = new DataInputStream(new FileInputStream("src/persistencia/uidB.txt"));
@@ -91,23 +91,37 @@ public class BocadilloServicio implements Crud {
         List<String> ingredientes = new ArrayList<>();
         List<String> alergenos = new ArrayList<>();
         try{
-            FileOutputStream fos = new FileOutputStream("src/persistencia/Bocadillo2.dat");
+            FileOutputStream fos = new FileOutputStream("src/persistencia/Bocadillo.dat");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(new Bocadillo(1, "Salchicha", true, ingredientes, alergenos, 2.10, "Sabado"));
-            //oos.writeObject(new Administrador("Lala", "lola", "perez", "lola@gmail.com", "12345", LocalDate.now()));
-
+            //oos.writeObject(new Bocadillo(1, "Salchicha", true, ingredientes, alergenos, 2.10, "Sábado"));
+            for(Bocadillo b: GesData.listaBocadillos){
+                oos.writeObject(b);
+            }
             fos.close();
             oos.flush();
             oos.close();
         }catch (EOFException e){
             e.getMessage();
         }catch (FileNotFoundException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }catch (IOException e){
             e.getMessage();
         }
 
 
+    }
+
+    public void listaBocadilos () {
+        for(Bocadillo b: GesData.listaBocadillos) {
+            System.out.print(b.getNombre() + ", Alergenos: " + b.getAlergenos() + ", Ingredientes: " + b.getIngredientes() + ", Precio: " + b.getPrecio());
+            if (b.isEs_caliente()) {
+                System.out.print(", Tipo: Caliente, ");
+            } else {
+                System.out.println("Tipo: Frío, ");
+            }
+            System.out.print(", Día: " + b.getDia());
+            System.out.println();
+        }
     }
 
     //BUSCAR Bocadillos POR ID

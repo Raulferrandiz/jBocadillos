@@ -1,20 +1,22 @@
 package ui;
 
+import autenticar.MenuAutenticar;
+import servicios.PedidoServicio;
 import utils.Validaciones;
 
 import java.util.Scanner;
 
 public class MenuCocina {
     static Scanner sc = new Scanner(System.in);
+    public static PedidoServicio pedidoServicio = new PedidoServicio();
     public static void menuCocina(){
         String inicio = "";
         do {
 
             System.out.println("===== Menú de COCINERA=====");
             System.out.println("1. Ver Pedidos");
-            System.out.println("2. ");
-            System.out.println("3. Crear Usuario");
-            System.out.println("0. Salir");
+            System.out.println("2. Entregar un Pedido");
+            System.out.println("0. Cerrar Sesión");
             System.out.println("Selecciona una opción:");
 
             inicio = sc.nextLine();
@@ -26,18 +28,14 @@ public class MenuCocina {
                     switch (ini) {
                         case 1:
                             System.out.println("Opción seleccionada: Ver pedidos");
-
+                            pedidoServicio.listaPedidos();
                             break;
                         case 2:
-                            System.out.println("Opción seleccionada: Gestionar Bocadillos");
-                            break;
-                        case 3:
-                            System.out.println("Opción seleccionada: Crear Usuario");
-
+                            System.out.println("Opción seleccionada: Entregar un Pedido");
                             break;
                         case 0:
-                            System.out.println("Gracias por usar mi programa");
-                            System.out.println("Saliendo...");
+                            System.out.println("Cerrar Sesión");
+                            MenuAutenticar.menuAuth();
                             break;
                         default:
                             System.out.println("Opción no válida");
@@ -50,6 +48,10 @@ public class MenuCocina {
             }
 
         } while (!inicio.equals("0"));
+
+    }
+
+    public void entregarPedido() {
 
     }
 }

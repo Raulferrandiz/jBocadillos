@@ -25,24 +25,9 @@ public class GesData {
         listaPedidos = pedidoServicio.obtenerPedidos();
     }
 
-    public static void cargarCalendarios(){
-
-    }
-
     public static void cargarUsuarios() throws IOException {
         //usuarioServicio.volcarLista();
         listaUsuarios = usuarioServicio.obtenerUsuarios();
     }
 
-    public static void actualizarUsuarios(Usuario modificado){
-        //usuarioServicio.modificarUsuario(modificado);
-    }
-
-    public static void insertarUsuario (Usuario nuevo){
-        listaUsuarios.add(nuevo);
-    }
-
-    public static void eliminarUsuario (Usuario eliminar){
-       // usuarioServicio.eliminarUsuario(eliminar.getUsuario());
-    }
 }

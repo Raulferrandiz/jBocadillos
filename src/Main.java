@@ -23,7 +23,7 @@ import ui.MenuCocina;
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
-    //static Bocadillo lista_semana[] = new Bocadillo[10];
+    public static PedidoServicio pedidoServicio = new PedidoServicio();
     public static void main(String[] args) throws IOException {
         UsuarioServicio usuarioServicio = new UsuarioServicio();
         BocadilloServicio bocadilloServicio = new BocadilloServicio();
@@ -48,10 +48,14 @@ public class Main {
         }*/
         //contra: 12345Aa#
 
-        bocadilloServicio.volcarLista();
+        //bocadilloServicio.volcarLista();
 
         GesData.cargarUsuarios();
         GesData.cargarBocadillos();
+        GesData.cargarPedidos();
+
+
+
         Usuario activo;
 
         //List<Usuario> usuarios = usuarioServicio.obtenerUsuarios();
@@ -66,7 +70,7 @@ public class Main {
         if (activo==null){
             System.out.println("NO ESTÁS EN EL SISTEMA");
         } else if (activo instanceof Alumno) {
-            MenuAlumno.menu();
+            MenuAlumno.menu(activo);
         } else if (activo instanceof Administrador) {
             MenuAdministrador.menuAdmin();
         } else if (activo instanceof Cocina) {
