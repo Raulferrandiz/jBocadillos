@@ -1,5 +1,6 @@
 package ui;
 
+import autenticar.MenuAutenticar;
 import data.GesData;
 import modelos.Bocadillo;
 import modelos.Pedido;
@@ -24,7 +25,7 @@ public class MenuAlumno {
 
             System.out.println("===== Menú de Alumno =====");
             System.out.println("1. Pedir un Bocadillo");
-            System.out.println("2. Ver Listado de Bocadillos");
+            System.out.println("2. Ver Todos los Bocadillos");
             System.out.println("3. Ver Pedidos");
             System.out.println("0. Salir");
             System.out.println("Selecciona una opción:");
@@ -41,7 +42,7 @@ public class MenuAlumno {
                             pedirBocadillo(u);
                             break;
                         case 2:
-                            System.out.println("OPCIÓN SELECCIONADA = Ver Listado de Bocadillos");
+                            System.out.println("OPCIÓN SELECCIONADA = Ver Todos los Bocadillos");
                             bocadilloServicio.listaBocadilos();
                             break;
                         case 3:
@@ -68,7 +69,7 @@ public class MenuAlumno {
         int id_pedido = PedidoServicio.autoincrementoPedidoID();
         String id_usuario = u.getUsuario();
 
-        String dia = "Sábado"; // o usar obtenerDiaSemanaActualEnEspanol()
+        String dia = PedidoServicio.obtenerDiaSemana();
         System.out.println("Hoy es: " + dia);
         System.out.println("==== Bocadillos de Hoy ====");
 
@@ -78,16 +79,16 @@ public class MenuAlumno {
             if (b.getDia().equalsIgnoreCase(dia)) {
                 System.out.print(num + ". " + b.getNombre() + ", " + b.getPrecio() + ", Ingredientes: " + b.getIngredientes() + ", Alergenos" + b.getAlergenos());
                 if (b.isEs_caliente()) {
-                    System.out.print("Tipo: Caliente, ");
+                    System.out.print("Tipo: Caliente ");
                 } else {
-                    System.out.println("Tipo: Frío, ");
+                    System.out.println("Tipo: Frío ");
                 }
                 System.out.println();
                 disponibles.add(b);
                 num++;
             }
         }
-
+        System.out.println("0. Salir");
 
 
         System.out.print("Elige un Bocadillo: ");
@@ -102,6 +103,8 @@ public class MenuAlumno {
             System.out.println("Añadiendo bocadillo a fichero...");
             GesData.listaPedidos.add(p);
             pedidoServicio.volcarLista();
+        } else if (opcion == 0) {
+            MenuAutenticar.menuAuth();
         } else {
             System.out.println("Opción no válida.");
         }

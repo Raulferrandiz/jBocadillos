@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * En esta clase se encuentran metodos para gestionar cosas relacionadas con la clase pedidos, insertarlos, listarlos, etc
+ * En esta clase se encuentran metodos para gestionar los pedidos, insertarlos, listarlos, etc
  * @author Raúl Ferrándiz Sáez
- * @version 1.1
+ * @version 1.2
  */
 
 public class PedidoServicio {
@@ -150,6 +150,11 @@ public class PedidoServicio {
         }
     }
 
+    /**
+     * En este metodo coje un número que se encuentra en el archivo uidP.txt y le aumenta 1, para insertarlo en el id del pedido
+     * Y luego lo vuelve a insertar en el archivo para el siguiente pedido
+     * @return numeroLeido
+     */
     public static int autoincrementoPedidoID() {
         int numeroLeido = 0;
         try {
@@ -173,6 +178,9 @@ public class PedidoServicio {
         return numeroLeido;
     }
 
+    /**
+     * Este metodo nos muestra todos los pedidos que hay y nos muestra los datos que especificamos
+     */
     public void listaPedidos () {
         for(Pedido p: GesData.listaPedidos) {
             int id_bocadillo = p.getId_bocadillo();
@@ -182,6 +190,11 @@ public class PedidoServicio {
         }
     }
 
+    /**
+     * Nos devuelve el nombre de un bocadillo que coincida con la id que establecemos
+     * @param id
+     * @return nombre
+     */
     public static String obtenerBocadilloId(int id) {
         for (Bocadillo b : GesData.listaBocadillos) {
             if (b.getId() == id) {
@@ -192,7 +205,7 @@ public class PedidoServicio {
     }
 
     /**
-     * Devuelve el día de la semana en español para la fecha actual.
+     * Devuelve el día de la semana en español y pone la primera letra en mayúscula para la fecha actual.
      *
      * @return el nombre del día en español (por ejemplo, "lunes", "martes", etc.)
      */
